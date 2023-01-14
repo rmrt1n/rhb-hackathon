@@ -3,26 +3,18 @@ import Link from "next/link";
 
 export default function Navbar() {
   return (
-    <header className="h-16 border-b shadow-md border bg-[#5bc2e7]">
+    <header className="h-16 border-b shadow-md border bg-[#5bc2e7] px-0 sm:px-4">
       <div className="max-w-5xl m-auto h-full flex justify-between items-center">
-        <div className="relative">
           <Link href="/">
             {/* //put a beuatiful logo text instead */}
             <div
               className="text-white font-bold text-xl"
-              style={{
-                position: "relative",
-                top: "50%",
-                right: "50%",
-                fontSize: "2rem",
-              }}
             >
               <span className="text-[#0368b2]">BizBoost</span>
               <span className="text-black">.</span>
               <span className="text-[#ee3e42]">AI</span>
             </div>
           </Link>
-        </div>
         <nav className="flex items-center gap-4 text-white leading-1">
           <Link
             href="/sme"
