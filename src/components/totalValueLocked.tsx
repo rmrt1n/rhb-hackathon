@@ -8,7 +8,7 @@ export const data = {
   labels: ["Bank A", "Bank B", "Bank C"],
   datasets: [
     {
-      label: "# of Votes",
+      label: "% of value locked",
       data: [12, 19, 3, 5, 2, 3],
       backgroundColor: [
         "rgba(255, 99, 132, 0.2)",

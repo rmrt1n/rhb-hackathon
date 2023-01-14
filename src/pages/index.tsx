@@ -123,6 +123,9 @@ export default function Dashboard() {
           borderWidth="2px"
           m={5}
           w="40%"
+          //add another gray layer on top, for "coming soon"
+          z-index={3}
+          bg="gray.700"
         >
           <Heading fontWeight="normal" p={1} letterSpacing="tight">
             Avg Credit Score
@@ -137,6 +140,7 @@ export default function Dashboard() {
               p={4}
               m={1}
               alignItems={"center"}
+              bg="gray.700"
             >
               9.9
             </Card>
