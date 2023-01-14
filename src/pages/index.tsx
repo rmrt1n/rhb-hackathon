@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Flex,
   Heading,
@@ -37,8 +37,123 @@ import {
 } from "react-icons/fi";
 import LoanDisbursements from "@/components/LoanDisbursements";
 import TotalValueLocked from "@/components/totalValueLocked";
+const axios = require("axios").default;
+
+export const algoanAuth = async () => {
+  let access_token;
+  const options = {
+    method: "POST",
+    url: "https://api.algoan.com/v1/oauth/token",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    data: {
+      grant_type: "client_credentials",
+      client_id: process.env.NEXT_ALGOAN_CLIENT_ID,
+      client_secret: process.env.NEXT_ALGOAN_CLIENT_SECRET,
+    },
+  };
+
+  await axios
+    .request(options)
+    .then(function async(response) {
+      access_token = response.data.access_token;
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+
+  return access_token;
+};
+
+const algoanCreateCustomer = async () => {
+  let access_token = await algoanAuth();
+  const createCustomer = {
+    method: "POST",
+    url: "https://api.algoan.com/v2/customers",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token}`,
+    },
+    data: {
+      customIdentifier: "bizboost.AI",
+    },
+  };
+
+  axios
+    .request(createCustomer)
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+};
+
+const algoanCreateAnalysis = async () => {
+  let access_token = await algoanAuth();
+  let customerId = "63c30543921c3f8b58503cb2";
+
+  const accountsUrl =
+    "https://raw.githubusercontent.com/algoan/fake-open-banking-data/main/samples/fr/harry_potter.json";
+
+  const options = {
+    method: "POST",
+    url: `https://api.algoan.com/v2/customers/${customerId}/analyses`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token}`,
+    },
+    data: {},
+  };
+  axios
+    .get(accountsUrl)
+    .then(function (response) {
+      const accounts = response.data;
+      options.data = accounts;
+
+      return axios.request(options);
+    })
+    .then(function (response) {
+      console.log(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+};
+
+const algoanGetAnalysis = async () => {
+  let access_token = await algoanAuth();
+  let customerId = "63c30543921c3f8b58503cb2";
+  let analysisId = "63c3064d1b8dc5d23ff7e9b4";
+
+  let creditScore;
+
+  const options = {
+    method: "GET",
+    url: `https://api.algoan.com/v2/customers/${customerId}/analyses/${analysisId}`,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${access_token}`,
+    },
+  };
+
+  axios
+    .request(options)
+    .then(function (response) {
+      creditScore = response.scores.creditScore.value;
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+
+  return creditScore;
+};
 
 export default function Dashboard() {
+  // const [creditScore, setCreditScore] = useState<any>(null);
+  // useEffect(() => {
+  //   setCreditScore(algoanGetAnalysis());
+  // });
+
   return (
     <Flex
       h="100vh"
