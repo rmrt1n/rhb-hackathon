@@ -1,11 +1,11 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Home() {
   return (
     <>
-    <div className="space-y-4 py-4">
-      <form className="max-w-xl m-auto space-y-4" >
-        <h1 className="font-bold text-2xl">Edit your project profile</h1>
+      <div className="space-y-4 py-4">
+        <form className="max-w-xl m-auto space-y-4">
+          <h1 className="font-bold text-2xl">Edit your project profile</h1>
           <div>
             <label htmlFor="name">Project Name</label>
             <input
@@ -17,7 +17,9 @@ export default function Home() {
           </div>
 
           <div>
-            <label htmlFor="desc">Give a brief description of your project</label>
+            <label htmlFor="desc">
+              Give a brief description of your project
+            </label>
             <textarea
               id="desc"
               className="block w-full p-2 text-gray-900 border border-gray-300 text-sm rounded-md bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"
@@ -28,7 +30,10 @@ export default function Home() {
           <FileSubmit label="Business registration form" id="1" />
           <FileSubmit label="Partnership agreement (if any)" id="2" />
           <FileSubmit label="Utility bills for the past 3 months" id="3" />
-          <FileSubmit label="Financial statements for the last 3 years (if has been in operations)" id="4" />
+          <FileSubmit
+            label="Financial statements for the last 3 years (if has been in operations)"
+            id="4"
+          />
           <FileSubmit label="Rental/Leasing agreement (if applicable)" id="5" />
           <FileSubmit label="Company business plan" id="6" />
           <div className="flex justify-center">
@@ -39,16 +44,16 @@ export default function Home() {
               Save
             </Link>
           </div>
-      </form>
-    </div>
+        </form>
+      </div>
     </>
-  )
+  );
 }
 
 function FileSubmit({ label, id }) {
   return (
     <div>
-      <label htmlFor={id}>{ label}</label>
+      <label htmlFor={id}>{label}</label>
       <input
         // required
         id={id}
@@ -60,5 +65,5 @@ function FileSubmit({ label, id }) {
           file:bg-gray-200 file:text-indigo-600 file:font-bold file:hover:cursor-pointer"
       />
     </div>
-  )
+  );
 }

@@ -61,7 +61,7 @@ export default function Project() {
               flexDir="row"
               alignItems="center"
               overflow="hidden"
-              bg="white"
+              bg="gray.700"
               fontStyle={{ fontFamily: "Inter" }}
               //color it black
               color="black"
@@ -74,7 +74,6 @@ export default function Project() {
               w="40%"
               //add another gray layer on top, for "coming soon"
               z-index={3}
-              bg="gray.700"
             >
               <Heading fontWeight="normal" p={1} letterSpacing="tight">
                 Credit Score
